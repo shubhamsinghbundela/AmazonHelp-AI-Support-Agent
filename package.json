@@ -3,6 +3,9 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "data:prepare": "bun run src/modules/dataPrep/dataPrep.script.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

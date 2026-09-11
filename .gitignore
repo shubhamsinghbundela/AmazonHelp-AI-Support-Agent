@@ -1,6 +1,7 @@
 # dependencies (bun install)
 node_modules
 
+data/processed/amazon-conversations.json
 data/raw/twcs.csv/twcs.csv
 
 # output
