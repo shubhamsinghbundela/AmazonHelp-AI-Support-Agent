@@ -4,7 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "data:prepare": "bun run src/modules/dataPrep/dataPrep.script.ts"
+    "data:prepare": "bun run src/modules/dataPrep/dataPrep.script.ts",
+    "retrieval:index": "bun run src/modules/retrieval/indexConversations.script.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -13,6 +14,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@pinecone-database/pinecone": "^9.0.0",
     "csv-parse": "^7.0.2"
   }
 }
