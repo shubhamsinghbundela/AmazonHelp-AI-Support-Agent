@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "data:prepare": "bun run src/modules/dataPrep/dataPrep.script.ts",
-    "retrieval:index": "bun run src/modules/retrieval/indexConversations.script.ts"
+    "retrieval:index": "bun run src/modules/retrieval/indexConversations.script.ts",
+    "agent:test": "bun run src/modules/agent/agent.script.ts",
+    "retrieval:export-ids": "bun run src/modules/retrieval/exportIndexedIds.script.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -15,6 +17,7 @@
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^9.0.0",
-    "csv-parse": "^7.0.2"
+    "csv-parse": "^7.0.2",
+    "openai": "^7.15.0"
   }
 }

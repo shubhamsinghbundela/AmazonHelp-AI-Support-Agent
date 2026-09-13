@@ -11,4 +11,6 @@ export const env = {
   voyageModel: process.env.VOYAGE_MODEL || "voyage-3.5-lite",
   pineconeApiKey: required("PINECONE_API_KEY"),
   pineconeIndexName: process.env.PINECONE_INDEX_NAME || "amazon-support-agent",
+  openaiApiKey: required("OPENAI_API_KEY"),
+  openaiModel: process.env.OPENAI_MODEL || "gpt-5.4-mini",
 };
