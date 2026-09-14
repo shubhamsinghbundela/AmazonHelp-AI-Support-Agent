@@ -8,7 +8,8 @@
     "retrieval:index": "bun run src/modules/retrieval/indexConversations.script.ts",
     "agent:test": "bun run src/modules/agent/agent.script.ts",
     "retrieval:export-ids": "bun run src/modules/retrieval/exportIndexedIds.script.ts",
-    "eval:sample-candidates": "bun run src/modules/evaluation/sampleGoldenCandidates.script.ts"
+    "eval:sample-candidates": "bun run src/modules/evaluation/sampleGoldenCandidates.script.ts",
+    "eval:run": "bun run src/modules/evaluation/runEvaluation.script.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
