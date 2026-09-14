@@ -8,5 +8,5 @@ import type { IntentType } from "../intent/intents.config";
  */
 export const FORCE_ESCALATE_INTENTS: IntentType[] = [
   "BILLING_ISSUE",
-  "ACCOUNT_ACCESS",
+  "ACCOUNT_ISSUE",
 ];

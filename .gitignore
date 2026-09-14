@@ -3,6 +3,8 @@ node_modules
 
 data/processed/amazon-conversations.json
 data/raw/twcs.csv/twcs.csv
+golden-set/golden-candidates.json
+data/processed/indexed-ids.json
 
 # output
 out
