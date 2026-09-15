@@ -1,8 +1,3 @@
-# AmazonHelp AI Support Agent
-
-An AI customer support agent built on ~2.8 million real Twitter customer-support tweets. Given a new customer message, it classifies intent, retrieves grounded historical context, drafts a reply, and decides whether the message should be auto-handled or escalated to a human — with evidence that the system can be trusted, not just that it runs.
-
----
 
 ## Quick Start
 
@@ -26,7 +21,7 @@ curl -fsSL https://bun.sh/install | bash
 
 ```bash
 git clone <this-repo>
-cd customer-support-agent
+cd AmazonHelp-AI-Support-Agent
 bun install
 cp .env.example .env
 # Paste the API keys provided separately (via email) into `.env`.
