@@ -1,3 +1,25 @@
+/**
+ * One-time setup script that builds the retrieval knowledge base.
+ *
+ * Reads the cleaned conversations from data/processed/amazon-
+ * conversations.json, embeds each conversation's customer_problem text
+ * (not the full transcript — this ensures the embedded content matches
+ * what will be searched against at runtime, since a new customer
+ * message is also just customer text with no resolution yet) using the
+ * Voyage embedding client, and upserts the resulting vectors into
+ * Pinecone in batches, along with customer_problem/brand_responses/
+ * turn_count as metadata for retrieval at query time.
+ *
+ * Indexed a subsample (not the full 82k conversations) per the
+ * assignment's guidance that a subsample is expected and encouraged —
+ * see decision log for the specific sample size and rationale.
+ *
+ * This only needs to be re-run if the knowledge base changes (new
+ * conversations added, or the embedding model changes, since vectors
+ * from different models aren't comparable).
+ *
+ * Run with: bun run retrieval:index
+ */
 import { readFileSync } from "fs";
 import path from "path";
 import type { Conversation } from "../../common/types/tweet.types";

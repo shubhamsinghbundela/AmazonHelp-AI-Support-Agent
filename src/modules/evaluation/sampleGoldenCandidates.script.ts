@@ -1,3 +1,13 @@
+/**
+ * Samples candidate conversations for the golden evaluation set.
+ *
+ * This script ONLY selects real customer messages from the held-out
+ * pool. It does NOT assign intent/decision labels — those fields
+ * are left empty in the output and must be filled in manually by a
+ * human, per the assignment's requirement to hand-label real data
+ * rather than auto-generate ground truth.
+ */
+
 import path from "path";
 import type { Conversation } from "../../common/types/tweet.types";
 import { readFileSync, writeFileSync } from "fs";

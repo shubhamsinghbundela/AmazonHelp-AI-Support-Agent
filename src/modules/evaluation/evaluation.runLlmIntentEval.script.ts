@@ -1,3 +1,22 @@
+/**
+ * Runs the full agent pipeline (embed → retrieve → classify → decide)
+ * against every labeled example in the golden set, and compares the
+ * agent's predictions to the human-assigned ground truth.
+ *
+ * For each golden example, checks:
+ *   - intent_correct: does predicted_intent match correct_intent?
+ *   - decision_correct: does predicted_decision match correct_decision?
+ *
+ * Produces two outputs:
+ *   - eval-results-detailed.json: per-example predictions vs. ground
+ *     truth, used later for failure analysis
+ *   - eval-summary.json: aggregate metrics — overall intent accuracy,
+ *     decision accuracy, per-intent accuracy breakdown, and a confusion
+ *     matrix showing which intents get mistaken for which
+ *
+ * This produces the assignment's core "automated metrics" deliverable
+ * (headline intent/decision accuracy numbers).
+ */
 import type {
   EvalResult,
   EvalSummary,

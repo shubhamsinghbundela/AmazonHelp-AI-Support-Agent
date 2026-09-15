@@ -1,3 +1,16 @@
+/**
+ * Samples 50 replies from the agent's evaluation results, for manual
+ * human quality scoring (1-5 scale).
+ *
+ * This script ONLY selects which replies to review — it does NOT score
+ * them. The human_score field is left null in the output and must be
+ * filled in manually by a human reader. These same 50 replies are then
+ * scored again by evaluation.runLLMReplyQualityJudge.script.ts, and the
+ * two sets of scores are compared to validate whether the LLM judge
+ * agrees closely enough with human judgment to be trusted for grading
+ * reply quality at scale.
+ */
+
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import path from "path";
 import type { EvalResult } from "./evaluation.types";

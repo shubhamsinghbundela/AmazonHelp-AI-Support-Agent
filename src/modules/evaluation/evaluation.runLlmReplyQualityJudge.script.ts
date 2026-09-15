@@ -1,6 +1,25 @@
+/**
+ * Validates whether the LLM-as-judge can be trusted to score reply
+ * quality automatically, by comparing it against human judgment.
+ *
+ * Reads the 50 replies sampled by
+ * evaluation.sampleForHumanReview.script.ts (which a human has already
+ * scored 1-5 in the human_score field), then scores those SAME 50
+ * replies using an LLM judge against a fixed rubric (issue-specificity,
+ * grounding in retrieved context, appropriate next step, tone).
+ *
+ * Computes agreement between human and LLM scores:
+ *   - exact_match: LLM score === human score
+ *   - within_one: |LLM score - human score| <= 1 (standard tolerance
+ *     for subjective 1-5 quality ratings)
+ *
+ * This agreement percentage is the required evidence that the LLM
+ * judge is reliable enough to use for grading reply quality at scale,
+ * without a human reading every single reply.
+ */
 import { readFileSync, writeFileSync } from "fs";
 import path from "path";
-import { judgeReply } from "./evaluation.replyQualityJudge.service";
+import { judgeReply } from "./evaluation.llmReplyQualityJudge.service";
 import { logger } from "../../common/utils/logger";
 
 interface HumanReviewEntry {

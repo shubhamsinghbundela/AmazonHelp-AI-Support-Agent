@@ -1,3 +1,23 @@
+/**
+ * Entry point for the data preparation pipeline.
+ *
+ * Reads the raw Twitter customer-support CSV (~2.8M tweets across many
+ * brands), filters to a single brand (AmazonHelp), reconstructs full
+ * conversation threads from the reply-chain structure (see
+ * dataPrep.service.ts for the BFS thread-reconstruction and root-finding
+ * logic), applies quality filters (English-only, turn-count bounds to
+ * exclude outlier threads), and writes the result as clean, structured
+ * JSON conversations.
+ *
+ * Output: data/processed/amazon-conversations.json — one entry per
+ * conversation, with the full transcript plus separate customer-only
+ * and brand-only text fields. This file is the input for all downstream
+ * work: intent taxonomy definition, embedding/indexing, and golden set
+ * sampling.
+ *
+ * Run with: bun run data:prepare
+ */
+
 import { writeFileSync } from "fs";
 import path from "path";
 import { prepareData } from "./dataPrep.service";
