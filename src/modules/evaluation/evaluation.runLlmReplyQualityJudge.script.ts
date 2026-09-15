@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from "fs";
 import path from "path";
-import { judgeReply } from "./llmJudge.service";
+import { judgeReply } from "./evaluation.replyQualityJudge.service";
 import { logger } from "../../common/utils/logger";
 
 interface HumanReviewEntry {
