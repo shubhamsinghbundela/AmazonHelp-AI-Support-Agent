@@ -1,15 +1,129 @@
-# customer-support-agent
+# AmazonHelp AI Support Agent
 
-To install dependencies:
+An AI customer support agent built on real Twitter customer-support conversations. Given a new customer message, it classifies intent, retrieves grounded historical context, drafts a reply, and decides whether the message should be auto-handled or escalated to a human — with evidence that the system can be trusted, not just that it runs.
+
+---
+
+## Quick Start
+
+### 1. Install Bun
+
+**Using npm** (if you already have Node.js installed):
 
 ```bash
+npm install -g bun
+```
+
+**Or, direct install:**
+
+macOS / Linux:
+
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
+
+### 2. Setup
+
+```bash
+git clone <this-repo>
+cd customer-support-agent
 bun install
+cp .env.example .env
+# Paste the API keys provided separately (via email) into `.env`.
 ```
 
-To run:
+### 3. Try the agent
 
 ```bash
-bun run index.ts
+bun run agent:test "My order hasn't arrived in 2 weeks"
 ```
 
-This project was created using `bun init` in bun v1.3.14. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+Expected output:
+
+```json
+{
+  "intent": "DELIVERY_ISSUE",
+  "reply": "I'm sorry for the delay! Please share your order number...",
+  "decision": "AUTO_HANDLE",
+  "reason": "Standard delivery delay, resolvable with tracking guidance"
+}
+```
+
+### 4. Evaluation Harness
+
+```bash
+bun run eval:intent       # intent + decision accuracy against the golden set
+bun run eval:baselines    # trivial + simple baseline comparison
+bun run eval:judge        # LLM-judge vs human agreement on reply quality
+```
+
+---
+
+## Golden Evaluation Set
+
+220 real customer messages, hand-labeled with the correct intent and decision.
+
+File: [`golden-set/golden-candidates.json`](./golden-set/golden-candidates.json)
+
+---
+
+## Human Review Sample
+
+50 replies randomly sampled from the agent's eval results, hand-scored 1-5 for quality using the same rubric later given to the LLM judge.
+
+File: [`golden-set/human-review-sample.json`](./golden-set/human-review-sample.json)
+
+---
+
+## Pipeline Overview
+
+```
+New customer message
+        │
+        ▼
+┌───────────────────┐
+│  Embed (Voyage)     │  convert message to a vector
+└─────────┬───────────┘
+          │
+          ▼
+┌───────────────────┐
+│  Retrieve (Pinecone)│  find 5 similar past AmazonHelp conversations
+└─────────┬───────────┘
+          │
+          ▼
+┌───────────────────┐
+│  Classify + Draft    │  LLM (gpt-5.4-mini) picks an intent, drafts a
+│  + Decide (OpenAI)   │  reply grounded in the retrieved examples, and
+│                       │  decides auto-handle vs escalate
+└─────────┬───────────┘
+          │
+          ▼
+{ intent, reply, decision, reason }
+```
+
+---
+
+## Project Structure
+
+```
+src/
+├── common/                    # infrastructure with no single owning module
+│   ├── config/env.ts
+│   ├── types/tweet.types.ts
+│   ├── utils/ (csvLoader, logger, sleep, sampling)
+│   └── llm/ (openai.service, voyageEmbedding.service)
+├── modules/
+│   ├── dataPrep/               # raw CSV -> clean conversation threads
+│   ├── intent/                 # shared intent taxonomy (13 categories)
+│   ├── retrieval/               # Pinecone indexing + retrieval
+│   ├── agent/                  # orchestrator: embed -> retrieve -> classify -> decide
+│   └── evaluation/             # golden set, automated metrics, baselines, LLM judge
+data/
+├── raw/twcs.csv                # (not committed — see Data section)
+└── processed/                  # cleaned conversations, indexed IDs
+golden-set/                     # hand-labeled eval set + all evaluation outputs
+```
+
+Each module's files follow a `moduleName.description.type.ts` naming convention (e.g. `dataPrep.service.ts`, `evaluation.runLLMIntentEval.script.ts`).
+
+---
