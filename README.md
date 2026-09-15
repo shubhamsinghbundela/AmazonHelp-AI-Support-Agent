@@ -53,7 +53,6 @@ Expected output:
 
 ```bash
 bun run eval:intent       # intent + decision accuracy against the golden set
-bun run eval:baselines    # trivial + simple baseline comparison
 bun run eval:judge        # LLM-judge vs human agreement on reply quality
 ```
 
