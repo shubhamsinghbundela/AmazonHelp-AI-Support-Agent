@@ -21,7 +21,7 @@ curl -fsSL https://bun.sh/install | bash
 
 ```bash
 git clone <this-repo>
-cd customer-support-agent
+cd AmazonHelp-AI-Support-Agent
 bun install
 cp .env.example .env
 # Paste the API keys provided separately (via email) into `.env`.
