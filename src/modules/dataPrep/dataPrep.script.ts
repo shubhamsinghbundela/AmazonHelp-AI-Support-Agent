@@ -4,7 +4,6 @@ import { prepareData } from "./dataPrep.service";
 import { logger } from "../../common/utils/logger";
 
 async function main() {
-  //process.cwd() = "current working directory" — it returns the folder path from where you ran the command in your terminal.
   const csvPath = path.join(process.cwd(), "data/raw/twcs.csv/twcs.csv");
   const outputPath = path.join(
     process.cwd(),

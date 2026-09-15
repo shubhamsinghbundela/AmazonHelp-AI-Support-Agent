@@ -1,6 +1,6 @@
 import { writeFileSync } from "fs";
 import path from "path";
-import { getIndex } from "./pinecone.service";
+import { getIndex } from "./retrieval.pinecone.service";
 import { logger } from "../../common/utils/logger";
 
 async function main() {

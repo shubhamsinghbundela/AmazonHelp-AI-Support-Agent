@@ -1,5 +1,5 @@
-import { embedBatch } from "../retrieval/embedding.service";
-import { queryTopK } from "../retrieval/pinecone.service";
+import { embedBatch } from "../retrieval/retrieval.embedding.service";
+import { queryTopK } from "../retrieval/retrieval.pinecone.service";
 import { callAgentModel } from "./openai.service";
 import { INTENTS } from "../intent/intents.config";
 import { FORCE_ESCALATE_INTENTS } from "./escalationRules.config";

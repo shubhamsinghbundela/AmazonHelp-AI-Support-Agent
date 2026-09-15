@@ -1,8 +1,8 @@
 import { readFileSync } from "fs";
 import path from "path";
 import type { Conversation } from "../../common/types/tweet.types";
-import { embedBatch, chunkArray, sleep } from "./embedding.service";
-import { upsertBatch, type VectorRecord } from "./pinecone.service";
+import { embedBatch, chunkArray, sleep } from "./retrieval.embedding.service";
+import { upsertBatch, type VectorRecord } from "./retrieval.pinecone.service";
 import { logger } from "../../common/utils/logger";
 
 const BATCH_SIZE = 50; // texts per Voyage API call

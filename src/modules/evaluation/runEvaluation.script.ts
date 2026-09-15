@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync } from "fs";
 import path from "path";
 import { logger } from "../../common/utils/logger";
 import { handleCustomerMessage } from "../agent/agent.service";
-import { sleep } from "../retrieval/embedding.service";
+import { sleep } from "../retrieval/retrieval.embedding.service";
 async function main() {
   const goldenSetPath = path.join(
     process.cwd(),
