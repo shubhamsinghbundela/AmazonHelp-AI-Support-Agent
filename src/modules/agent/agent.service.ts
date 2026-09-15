@@ -1,8 +1,8 @@
 import { embedBatch } from "../retrieval/retrieval.embedding.service";
 import { queryTopK } from "../retrieval/retrieval.pinecone.service";
-import { callAgentModel } from "./openai.service";
+import { callAgentModel } from "./agent.openai.service";
 import { INTENTS } from "../intent/intents.config";
-import { FORCE_ESCALATE_INTENTS } from "./escalationRules.config";
+import { FORCE_ESCALATE_INTENTS } from "./agent.escalationRules.config";
 import { logger } from "../../common/utils/logger";
 import type { AgentResponse } from "./agent.types";
 

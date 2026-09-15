@@ -1,4 +1,4 @@
-import { callAgentModel } from "../agent/openai.service";
+import { callAgentModel } from "../agent/agent.openai.service";
 import { logger } from "../../common/utils/logger";
 
 interface JudgeInput {
