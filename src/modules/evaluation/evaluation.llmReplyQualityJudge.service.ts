@@ -13,12 +13,15 @@ interface JudgeOutput {
 
 const RUBRIC = `Score the support agent's reply on a scale of 1-5 based on:
 1. Does it address the specific issue mentioned in the customer's message?
-2. Is it grounded and specific (not generic boilerplate that could apply to anything)?
-3. Does it take an appropriate next step (ask for info, offer resolution, or direct to proper channel)?
-4. Is the tone professional and empathetic?
+2. Does it take an appropriate next step — for complaints or problems, this
+   means asking for info, offering a resolution, or directing to the proper
+   channel; for positive feedback or simple acknowledgments, a warm response
+   with no next step is entirely appropriate and should NOT be penalized.
 
 Scoring guide:
-5 = Excellent: directly addresses the issue, specific, professional, clear next step
+5 = Excellent: directly addresses the message, specific, professional, and
+    takes the right action for the situation (including "no action needed"
+    when the message doesn't call for one)
 4 = Good: addresses the issue well, minor room for improvement
 3 = Adequate: generic but not wrong, doesn't fully address specifics
 2 = Poor: misses the point, too generic, or awkward
