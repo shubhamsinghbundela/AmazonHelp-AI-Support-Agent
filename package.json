@@ -11,7 +11,8 @@
     "eval:sample-candidates": "bun run src/modules/evaluation/sampleGoldenCandidates.script.ts",
     "eval:run": "bun run src/modules/evaluation/evaluation.runLlmIntentEval.script.ts",
     "eval:sample-human": "bun run src/modules/evaluation/sampleForHumanReview.script.ts",
-    "eval:judge": "bun run src/modules/evaluation/evaluation.runLlmReplyQualityJudge.script.ts"
+    "eval:judge": "bun run src/modules/evaluation/evaluation.runLlmReplyQualityJudge.script.ts",
+    "eval:baselines": "bun run src/modules/evaluation/evaluation.runBaselinesEval.script.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
