@@ -1,6 +1,6 @@
 # AmazonHelp AI Support Agent
 
-An AI customer support agent built on real Twitter customer-support conversations. Given a new customer message, it classifies intent, retrieves grounded historical context, drafts a reply, and decides whether the message should be auto-handled or escalated to a human — with evidence that the system can be trusted, not just that it runs.
+An AI customer support agent built on ~2.8 million real Twitter customer-support tweets. Given a new customer message, it classifies intent, retrieves grounded historical context, drafts a reply, and decides whether the message should be auto-handled or escalated to a human — with evidence that the system can be trusted, not just that it runs.
 
 ---
 
