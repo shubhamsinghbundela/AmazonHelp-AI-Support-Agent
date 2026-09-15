@@ -5,9 +5,11 @@ data/processed/amazon-conversations.json
 data/raw/twcs.csv/twcs.csv
 data/processed/indexed-ids.json
 
-golden-set/golden-candidates.json
-golden-set/eval-summary.json
-golden-set/eval-results-detailed.json
+golden-set/intent-eval-results-detailed.json
+golden-set/intent-eval-summary.json
+
+golden-set/llm-judge-detailed.json
+golden-set/llm-judge-summary.json
 
 # output
 out

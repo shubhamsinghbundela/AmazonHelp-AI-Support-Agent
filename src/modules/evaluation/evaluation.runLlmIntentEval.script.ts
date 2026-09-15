@@ -48,7 +48,7 @@ async function main() {
 
   for (const [index, example] of labeledExamples.entries()) {
     logger.step(
-      `[${index + 1}/${labeledExamples.length}] ${example.conversation_id}`,
+      `[${index + 1}/${labeledExamples.length}] - ConversationId: ${example.conversation_id}`,
     );
 
     try {
@@ -93,55 +93,27 @@ async function main() {
   const decisionCorrectCount = results.filter((r) => r.decision_correct).length;
   const errorCount = results.filter((r) => r.error).length;
 
-  const perIntentAccuracy: EvalSummary["per_intent_accuracy"] = {};
-  const confusionMatrix: EvalSummary["confusion_matrix"] = {};
-
-  for (const r of results) {
-    // Per-intent accuracy
-    if (!perIntentAccuracy[r.correct_intent]) {
-      perIntentAccuracy[r.correct_intent] = {
-        correct: 0,
-        total: 0,
-        accuracy: 0,
-      };
-    }
-
-    perIntentAccuracy[r.correct_intent]!.total += 1;
-    if (r.intent_correct) perIntentAccuracy[r.correct_intent]!.correct += 1;
-
-    // Confusion matrix: actual -> predicted -> count
-    if (!confusionMatrix[r.correct_intent]) {
-      confusionMatrix[r.correct_intent] = {};
-    }
-    confusionMatrix[r.correct_intent]![r.predicted_intent] =
-      (confusionMatrix[r.correct_intent]![r.predicted_intent] || 0) + 1;
-  }
-
-  for (const intent in perIntentAccuracy) {
-    const stats = perIntentAccuracy[intent];
-    stats!.accuracy = stats!.total > 0 ? stats!.correct / stats!.total : 0;
-  }
-
   const summary: EvalSummary = {
     total_examples: results.length,
     intent_accuracy: intentCorrectCount / results.length,
     decision_accuracy: decisionCorrectCount / results.length,
-    per_intent_accuracy: perIntentAccuracy,
-    confusion_matrix: confusionMatrix,
     errors: errorCount,
   };
 
   // --- Save both detailed results and summary ---
   const resultsPath = path.join(
     process.cwd(),
-    "golden-set/eval-results-detailed.json",
+    "golden-set/intent-eval-results-detailed.json",
   );
-  const summaryPath = path.join(process.cwd(), "golden-set/eval-summary.json");
+  const summaryPath = path.join(
+    process.cwd(),
+    "golden-set/intent-eval-summary.json",
+  );
 
   writeFileSync(resultsPath, JSON.stringify(results, null, 2));
   writeFileSync(summaryPath, JSON.stringify(summary, null, 2));
 
-  logger.step("=== EVALUATION SUMMARY ===");
+  logger.step("=== INTENT EVALUATION SUMMARY ===");
   console.log(`Total examples: ${summary.total_examples}`);
   console.log(
     `Intent accuracy: ${(summary.intent_accuracy * 100).toFixed(1)}%`,
@@ -150,15 +122,9 @@ async function main() {
     `Decision accuracy: ${(summary.decision_accuracy * 100).toFixed(1)}%`,
   );
   console.log(`Errors: ${summary.errors}`);
-  console.log(`\nPer-intent accuracy:`);
-  for (const [intent, stats] of Object.entries(summary.per_intent_accuracy)) {
-    console.log(
-      `  ${intent}: ${(stats.accuracy * 100).toFixed(1)}% (${stats.correct}/${stats.total})`,
-    );
-  }
 
-  logger.info(`\n✅ Detailed results saved to ${resultsPath}`);
-  logger.info(`✅ Summary saved to ${summaryPath}`);
+  logger.info(`\n Detailed results saved to ${resultsPath}`);
+  logger.info(` Summary saved to ${summaryPath}`);
 }
 
 main().catch((err) => {

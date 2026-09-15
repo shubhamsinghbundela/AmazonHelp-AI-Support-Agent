@@ -24,17 +24,5 @@ export interface EvalSummary {
   total_examples: number; // How many golden examples were actually evaluated.
   intent_accuracy: number; // Overall percentage of examples where predicted_intent matched correct_intent.
   decision_accuracy: number; // Overall percentage of examples where predicted_decision matched correct_decision.
-  per_intent_accuracy: Record<
-    string,
-    { correct: number; total: number; accuracy: number }
-  >; //instead of one overall number, you see accuracy separately for each of your 13 intents.
-  confusion_matrix: Record<string, Record<string, number>>;
   errors: number;
 }
-
-// Confusion_matrix:
-// Human said delivery issue" 91 times. The AI agreed with you 80 times, and picked a different (wrong) category 11 times
-//91 = total examples where YOU (human) labeled the true answer as DELIVERY_ISSUE
-// 80 = how many of those the AI ALSO correctly said DELIVERY_ISSUE
-// 11 = how many the AI got wrong (guessed something else instead)
-//      (1+2+3+2+1+1+1 = 11, and 80+11 = 91 ✓)

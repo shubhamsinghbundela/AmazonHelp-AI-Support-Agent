@@ -5,13 +5,13 @@
   "private": true,
   "scripts": {
     "data:prepare": "bun run src/modules/dataPrep/dataPrep.script.ts",
-    "retrieval:index": "bun run src/modules/retrieval/indexConversations.script.ts",
+    "retrieval:index": "bun run src/modules/retrieval/retrieval.buildIndex.script.ts",
     "agent:test": "bun run src/modules/agent/agent.script.ts",
-    "retrieval:export-ids": "bun run src/modules/retrieval/exportIndexedIds.script.ts",
+    "retrieval:export-ids": "bun run src/modules/retrieval/retrieval.exportIndexedIds.script.ts",
     "eval:sample-candidates": "bun run src/modules/evaluation/sampleGoldenCandidates.script.ts",
-    "eval:run": "bun run src/modules/evaluation/runEvaluation.script.ts",
+    "eval:run": "bun run src/modules/evaluation/evaluation.runLlmIntentEval.script.ts",
     "eval:sample-human": "bun run src/modules/evaluation/sampleForHumanReview.script.ts",
-    "eval:judge": "bun run src/modules/evaluation/runLlmJudge.script.ts"
+    "eval:judge": "bun run src/modules/evaluation/evaluation.runLlmReplyQualityJudge.script.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
