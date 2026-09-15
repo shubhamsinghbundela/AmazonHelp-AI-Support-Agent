@@ -9,7 +9,9 @@
     "agent:test": "bun run src/modules/agent/agent.script.ts",
     "retrieval:export-ids": "bun run src/modules/retrieval/exportIndexedIds.script.ts",
     "eval:sample-candidates": "bun run src/modules/evaluation/sampleGoldenCandidates.script.ts",
-    "eval:run": "bun run src/modules/evaluation/runEvaluation.script.ts"
+    "eval:run": "bun run src/modules/evaluation/runEvaluation.script.ts",
+    "eval:sample-human": "bun run src/modules/evaluation/sampleForHumanReview.script.ts",
+    "eval:judge": "bun run src/modules/evaluation/runLlmJudge.script.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
