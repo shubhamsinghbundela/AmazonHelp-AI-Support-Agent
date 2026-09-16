@@ -55,11 +55,8 @@ bun run eval:judge        # LLM-judge vs human agreement on reply quality
 
 ## Golden Evaluation Set
 
-**220 real customer messages**, hand-labeled with the correct intent and decision.
+220 real customer messages, hand-labeled with correct intent and decision. Sampled from conversations *not* in the Pinecone index (avoids the agent retrieving its own answer), using a seeded shuffle for reproducibility. Labeled manually against a 13-category taxonomy derived from reading 100+ real conversations first.
 
-**How they were sampled:** Drawn only from conversations *not* included in the Pinecone retrieval index (a held-out pool of ~63,000 conversations) — this prevents the agent from being tested on a message it could trivially retrieve its own exact answer for. Sampling used a seeded shuffle (`evaluation.sampleGoldenCandidates.script.ts`) so the same 220 examples are reproducible on any machine.
-
-**How they were labeled:** Each message was manually read and assigned one of 13 intent categories (derived by first reading 100+ real conversations before defining the taxonomy — not decided upfront) and a decision (`AUTO_HANDLE` or `ESCALATE`, following a fixed policy: billing and account issues always escalate; everything else defaults to auto-handle unless clearly severe).
 
 File: [`golden-set/golden-candidates.json`](./golden-set/golden-candidates.json)
 
