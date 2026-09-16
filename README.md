@@ -70,6 +70,8 @@ File: [`golden-set/golden-candidates.json`](./golden-set/golden-candidates.json)
 
 **LLM-as-judge for reply quality** (`bun run eval:judge`): scores the 50 sampled replies 1-5 against a rubric (issue-specificity, grounding, appropriate next step, tone), and compares those scores against my own manual scoring of the same 50 replies.
 
+File: [`golden-set/human-review-sample.json`](./golden-set/human-review-sample.json)
+
 **Result:** 100% agreement within 1 point, 32% exact agreement, average difference 0.68 (n=50) — this is the evidence that the LLM judge can be trusted for reply-quality scoring. 
 
 ---
