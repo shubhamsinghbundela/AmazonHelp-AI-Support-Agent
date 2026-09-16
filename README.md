@@ -65,14 +65,6 @@ File: [`golden-set/golden-candidates.json`](./golden-set/golden-candidates.json)
 
 ---
 
-## Human Review Sample
-
-**50 replies**, randomly sampled (seeded, reproducible) from the agent's evaluation results, hand-scored 1-5 for reply quality using the same rubric later given to the LLM judge — used to validate whether the LLM judge can be trusted.
-
-File: [`golden-set/human-review-sample.json`](./golden-set/human-review-sample.json)
-
----
-
 ## Evaluation Harness
 
 **Automated metrics** (`bun run eval:intent`): runs the agent against all 220 golden examples, computes intent accuracy, decision accuracy, per-intent breakdown, and a confusion matrix.
