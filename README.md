@@ -59,10 +59,6 @@ bun run eval:judge        # LLM-judge vs human agreement on reply quality
 
 File: [`golden-set/golden-candidates.json`](./golden-set/golden-candidates.json)
 
----
-
-## Human Review Sample
-
 50 replies randomly sampled from the agent's eval results, hand-scored 1-5 for quality using the same rubric later given to the LLM judge.
 
 File: [`golden-set/human-review-sample.json`](./golden-set/human-review-sample.json)
