@@ -55,13 +55,33 @@ bun run eval:judge        # LLM-judge vs human agreement on reply quality
 
 ## Golden Evaluation Set
 
-220 real customer messages, hand-labeled with the correct intent and decision.
+**220 real customer messages**, hand-labeled with the correct intent and decision.
+
+**How they were sampled:** Drawn only from conversations *not* included in the Pinecone retrieval index (a held-out pool of ~63,000 conversations) — this prevents the agent from being tested on a message it could trivially retrieve its own exact answer for. Sampling used a seeded shuffle (`evaluation.sampleGoldenCandidates.script.ts`) so the same 220 examples are reproducible on any machine.
+
+**How they were labeled:** Each message was manually read and assigned one of 13 intent categories (derived by first reading 100+ real conversations before defining the taxonomy — not decided upfront) and a decision (`AUTO_HANDLE` or `ESCALATE`, following a fixed policy: billing and account issues always escalate; everything else defaults to auto-handle unless clearly severe).
 
 File: [`golden-set/golden-candidates.json`](./golden-set/golden-candidates.json)
 
-50 replies randomly sampled from the agent's eval results, hand-scored 1-5 for quality using the same rubric later given to the LLM judge.
+---
+
+## Human Review Sample
+
+**50 replies**, randomly sampled (seeded, reproducible) from the agent's evaluation results, hand-scored 1-5 for reply quality using the same rubric later given to the LLM judge — used to validate whether the LLM judge can be trusted.
 
 File: [`golden-set/human-review-sample.json`](./golden-set/human-review-sample.json)
+
+---
+
+## Evaluation Harness
+
+**Automated metrics** (`bun run eval:intent`): runs the agent against all 220 golden examples, computes intent accuracy, decision accuracy, per-intent breakdown, and a confusion matrix.
+
+**Result:** 72.6% intent accuracy, 85.4% decision accuracy.
+
+**LLM-as-judge for reply quality** (`bun run eval:judge`): scores the 50 sampled replies 1-5 against a rubric (issue-specificity, grounding, appropriate next step, tone), and compares those scores against my own manual scoring of the same 50 replies.
+
+**Result:** 100% agreement within 1 point, 32% exact agreement, average difference 0.68 (n=50) — this is the evidence that the LLM judge can be trusted for reply-quality scoring. 
 
 ---
 
